@@ -13,6 +13,7 @@ import struct.Key;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 /**
  * キー入力データをそれに対応するアクションに変換する処理を行うクラス．
@@ -37,6 +38,8 @@ public class CommandTable {
     static private Action forcedActionP1 = null;
     static private Action forcedActionP2 = null;
 
+    static private Long nanoStartP1 = 0L;
+    static private Long nanoStartP2 = 0L;
     /**
      * クラスコンストラクタ．
      */
@@ -52,10 +55,45 @@ public class CommandTable {
     static public void performOneTimeAction(Action action, boolean isPlayerOne) {
         if (isPlayerOne) {
             CommandTable.forcedActionP1 = action;
+            CommandTable.nanoStartP1 = 0L;
         } else {
             CommandTable.forcedActionP2 = action;
+            CommandTable.nanoStartP2 = 0L;
         }
     }
+
+    static public void startAction(Action action, boolean isPlayerOne){
+        if (isPlayerOne){
+            CommandTable.forcedActionP1 = action;
+            CommandTable.nanoStartP1 = System.nanoTime();
+        }else {
+            CommandTable.forcedActionP2 = action;
+            CommandTable.nanoStartP2 = System.nanoTime();
+        }
+    }
+
+    static public void stopAction(Action action, boolean isPlayerOne){
+        if (isPlayerOne){
+            if (action == CommandTable.forcedActionP1){
+                stopAllActions(true);
+            }
+        }else {
+            if (action == CommandTable.forcedActionP2){
+                stopAllActions(false);
+            }
+        }
+    }
+
+    static public void stopAllActions(boolean isPlayerOne){
+        if (isPlayerOne) {
+            CommandTable.forcedActionP1 = null;
+            CommandTable.nanoStartP1 = 0L;
+        }else {
+            CommandTable.forcedActionP2 = null;
+            CommandTable.nanoStartP2 = 0L;
+        }
+    }
+
 
     /**
      * P1またはP2のキー入力データを対応するアクションに変換する処理を行い，そのアクションを返す．<br>
