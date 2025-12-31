@@ -38,6 +38,10 @@ public class CommandTable {
     static private Action forcedActionP1 = null;
     static private Action forcedActionP2 = null;
 
+    // By default we press these keys for 5 seconds
+    static private int P1PressDuration = 5;
+    static private int P2PressDuration = 5;
+
     static private Long nanoStartP1 = 0L;
     static private Long nanoStartP2 = 0L;
     /**
@@ -112,15 +116,25 @@ public class CommandTable {
         if (character.isPlayerNumber()) {
             // Player 1 logic
             if (CommandTable.forcedActionP1 != null) {
+                long waitTime = P1PressDuration * 1_000_000_000L;
                 Action act = CommandTable.forcedActionP1;
-                CommandTable.forcedActionP1 = null; // Reset to null so it only plays once
+
+                if (nanoStartP1 > 0 && System.nanoTime() - nanoStartP1 > waitTime){
+                    CommandTable.forcedActionP1 = null;
+                }
+
                 return act;
             }
         } else {
             // Player 2 logic
             if (CommandTable.forcedActionP2 != null) {
+                long waitTime = P2PressDuration * 1_000_000_000L;
                 Action act = CommandTable.forcedActionP2;
-                CommandTable.forcedActionP2 = null; // Reset to null so it only plays once
+
+                if (nanoStartP2 > 0 && System.nanoTime() - nanoStartP2 > waitTime){
+                    CommandTable.forcedActionP2 = null;
+                }
+
                 return act;
             }
         }

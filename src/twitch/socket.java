@@ -34,6 +34,16 @@ public class socket {
             });
 
             //Team Attack
+            socket.on("oneaction", args->{
+                String teamArg = (String) args[0];
+                String actionArg = (String) args[1];
+
+                Action action = ATTACK_MAP.get(actionArg);
+                Boolean team = TEAM_MAP.get(teamArg);
+
+                CommandTable.performOneTimeAction(action, team);
+            });
+
             socket.on("action", args->{
                 String teamArg = (String) args[0];
                 String actionArg = (String) args[1];
