@@ -15,15 +15,6 @@ public class socket {
     private static final int SOCKET_PORT = 3001;
     private static final String SERVER_CONNECTION = "Connected to Server!";
 
-        /*
-    Punch: Action.STAND_FA
-    Crouch: Action.CROUCH
-    Walk Forward: FORWARD_WALK
-    Step Back: BACK_STEP
-    Guard: STAND_GUARD
-    Punch Up: STAND_F_D_DFA
-    * */
-
     // Attack List
     static private final HashMap<String, Action> ATTACK_MAP = new HashMap<>() {{
         put("STAND_FA", Action.STAND_FA);
