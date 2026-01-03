@@ -7,7 +7,7 @@ import io.socket.client.Socket;
 import manager.InputManager;
 import struct.Key;
 import java.util.HashMap;
-
+import java.util.concurrent.*;
 
 import java.net.URISyntaxException;
 
@@ -15,9 +15,23 @@ public class socket {
     private static final int SOCKET_PORT = 3001;
     private static final String SERVER_CONNECTION = "Connected to Server!";
 
+        /*
+    Punch: Action.STAND_FA
+    Crouch: Action.CROUCH
+    Walk Forward: FORWARD_WALK
+    Step Back: BACK_STEP
+    Guard: STAND_GUARD
+    Punch Up: STAND_F_D_DFA
+    * */
+
     // Attack List
     static private final HashMap<String, Action> ATTACK_MAP = new HashMap<>() {{
         put("STAND_FA", Action.STAND_FA);
+        put("CROUCH", Action.CROUCH);
+        put("FORWARD_WALK", Action.FORWARD_WALK);
+        put("BACK_STEP", Action.BACK_STEP);
+        put("STAND_GUARD", Action.STAND_GUARD);
+        put("STAND_F_D_DFA", Action.STAND_F_D_DFA);
     }};
 
     static private final HashMap<String, Boolean> TEAM_MAP = new HashMap<String, Boolean>(){{
@@ -72,7 +86,6 @@ public class socket {
             });
 
             socket.connect();
-
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

@@ -38,9 +38,9 @@ public class CommandTable {
     static private Action forcedActionP1 = null;
     static private Action forcedActionP2 = null;
 
-    // By default we press these keys for 5 seconds
-    static private int P1PressDuration = 5;
-    static private int P2PressDuration = 5;
+    // By default we press these keys for 2 seconds
+    static private int P1PressDuration = 2;
+    static private int P2PressDuration = 2;
 
     static private Long nanoStartP1 = 0L;
     static private Long nanoStartP2 = 0L;
