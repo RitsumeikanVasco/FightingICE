@@ -306,7 +306,7 @@ public class Play extends GameScene {
         if (LaunchSetting.isExpectedProcessingMode(LaunchSetting.HEADLESS_MODE)) {
             // 画面をDrawerクラスで描画
             ResourceDrawer.getInstance().drawResource(this.fighting.getCharacters(), this.fighting.getProjectileDeque(),
-                    this.fighting.getHitEffectList(), this.frameData.getRemainingTimeMilliseconds(), this.currentRound, FlagSetting.visualVisibleOnRender);
+                    this.fighting.getHitEffectList(), 0, this.currentRound, FlagSetting.visualVisibleOnRender);
         }
 
         // リプレイログ吐き出し

@@ -93,7 +93,7 @@ public class ResourceDrawer {
 	 *            P1とP2のキャラクターデータを格納した配列
 	 */
 	public void drawCharacterImage(Character[] playerCharacters, boolean shouldRender) {
-		String[] names = { "P1", "P2" };
+		String[] names = { "Team 1", "Team 2" };
 
 		// draw players name
 		for (int i = 0; i < 2; ++i) {
@@ -206,23 +206,23 @@ public class ResourceDrawer {
 		if (FlagSetting.trainingModeFlag) {
 			GraphicManager.getInstance().drawString("Training Mode", GameSetting.STAGE_WIDTH / 2 - 80, 10, shouldRender);
 		} else {
-			GraphicManager.getInstance().drawString(String.format("%.3f", remainingTime / 1000.0), GameSetting.STAGE_WIDTH / 2 - 35, 10, shouldRender);
+			// GraphicManager.getInstance().drawString(String.format("%.3f", remainingTime / 1000.0), GameSetting.STAGE_WIDTH / 2 - 35, 10, shouldRender);
 		}
 	}
 
 	private void drawPlayerDetail(Character[] playerCharacters, boolean shouldRender) {
 		if (FlagSetting.limitHpFlag) {
-			GraphicManager.getInstance().drawString("P1 HP: " + Math.max(0, playerCharacters[0].getHp()), 130 + 30, 45, shouldRender);
-			GraphicManager.getInstance().drawString("Energy: " + playerCharacters[0].getEnergy(), 260 + 30, 45, shouldRender);
+			GraphicManager.getInstance().drawString("Team 1 HP: " + Math.max(0, playerCharacters[0].getHp()), 130 + 30, 45, shouldRender);
+			GraphicManager.getInstance().drawString("Energy: " + playerCharacters[0].getEnergy(), 160, 45 + 60, shouldRender);
 			
-			GraphicManager.getInstance().drawString("P2 HP: " + Math.max(0, playerCharacters[1].getHp()), 590 - 30, 45, shouldRender);
-			GraphicManager.getInstance().drawString("Energy: " + playerCharacters[1].getEnergy(), 720 - 30, 45, shouldRender);
+			GraphicManager.getInstance().drawString("Team 2 HP: " + Math.max(0, playerCharacters[1].getHp()), 590 - 30, 45, shouldRender);
+			GraphicManager.getInstance().drawString("Energy: " + playerCharacters[1].getEnergy(), 590 - 30, 45 + 60, shouldRender);
 		} else {
-			GraphicManager.getInstance().drawString("P1 HP: " + playerCharacters[0].getHp(), 100, 50, shouldRender);
-			GraphicManager.getInstance().drawString("P1 Energy: " + playerCharacters[0].getEnergy(), 100, 90, shouldRender);
+			GraphicManager.getInstance().drawString("Team 1 HP: " + playerCharacters[0].getHp(), 100, 50, shouldRender);
+			GraphicManager.getInstance().drawString("Team 1 Energy: " + playerCharacters[0].getEnergy(), 100, 90, shouldRender);
 			
-			GraphicManager.getInstance().drawString("P2 HP: " + playerCharacters[1].getHp(), 760, 50, shouldRender);
-			GraphicManager.getInstance().drawString("P2 Energy: " + playerCharacters[1].getEnergy(), 760, 90, shouldRender);
+			GraphicManager.getInstance().drawString("Team 2 HP: " + playerCharacters[1].getHp(), 760, 50, shouldRender);
+			GraphicManager.getInstance().drawString("Team 2 Energy: " + playerCharacters[1].getEnergy(), 760, 90, shouldRender);
 		}
 	}
 	
