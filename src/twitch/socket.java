@@ -17,12 +17,48 @@ public class socket {
 
     // Attack List
     static private final HashMap<String, Action> ATTACK_MAP = new HashMap<>() {{
-        put("STAND_FA", Action.STAND_FA);
-        put("CROUCH", Action.CROUCH);
+        // Move 
         put("FORWARD_WALK", Action.FORWARD_WALK);
         put("BACK_STEP", Action.BACK_STEP);
+        put("DASH", Action.DASH);
+
+        // Jump
+        put("JUMP", Action.JUMP);
+        put("FOR_JUMP", Action.FOR_JUMP);
+        put("BACK_JUMP", Action.BACK_JUMP);
+
+        // Stance
+        put("STAND", Action.STAND);
+        put("CROUCH", Action.CROUCH);
+
+        // Shield
         put("STAND_GUARD", Action.STAND_GUARD);
+        put("CROUCH_GUARD", Action.CROUCH_GUARD);
+        put("AIR_GUARD", Action.AIR_GUARD);
+
+        // Normal Attack
+        put("STAND_A", Action.STAND_A);
+        put("STAND_B", Action.STAND_B);
+        put("CROUCH_A", Action.CROUCH_A);
+        put("CROUCH_B", Action.CROUCH_B);
+        put("AIR_A", Action.AIR_A);
+        put("AIR_B", Action.AIR_B);
+
+        // Strong Attak
+        put("STAND_FA", Action.STAND_FA);
+        put("STAND_FB", Action.STAND_FB);
+        put("CROUCH_FA", Action.CROUCH_FA);
+        put("CROUCH_FB", Action.CROUCH_FB);
+
+        // Input ID
+        put("STAND_D_DF_FA", Action.STAND_D_DF_FA);
+        put("STAND_D_DF_FB", Action.STAND_D_DF_FB);
         put("STAND_F_D_DFA", Action.STAND_F_D_DFA);
+        put("STAND_F_D_DFB", Action.STAND_F_D_DFB);
+
+        // Jump Attack
+        put("AIR_FA", Action.AIR_FA);
+        put("AIR_FB", Action.AIR_FB);
     }};
 
     static private final HashMap<String, Boolean> TEAM_MAP = new HashMap<String, Boolean>(){{
