@@ -8,6 +8,7 @@ import loader.ResourceLoader;
 import manager.GraphicManager;
 import manager.InputManager;
 import setting.GameSetting;
+import twitch.socket;
 
 /**
  * 起動情報を基に次のゲームシーンを初期化し, 必要なリソースを読み込むクラス．
@@ -67,6 +68,7 @@ public class Launcher extends GameScene {
 			case "PLAY":
 				Logger.getAnonymousLogger().log(Level.INFO, "Transition to PLAY");
 				Play play = new Play();
+                socket.play = play;
 				this.setTransitionFlag(true);
 				this.setNextGameScene(play);
 				break;

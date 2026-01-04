@@ -310,6 +310,22 @@ public class Character {
     }
 
     /**
+     * Heals the character by a specific amount, without exceeding max HP.
+     * @param amount The amount of HP to restore.
+     */
+    public void heal(int amount) {
+        int maxHp = LaunchSetting.maxHp[this.playerNumber ? 0 : 1];
+        this.hp = Math.min(this.hp + amount, maxHp);
+
+        // Optional: Play a sound effect if healing occurs
+        if (!this.isSimulateProcess && amount > 0) {
+            // You could use sourceEnergyChange or a new source for a 'heal' sound
+            SoundManager.getInstance().play2(sourceEnergyChange,
+                    SoundManager.getInstance().getSoundBuffer("EnergyCharge.wav"), this.x, this.y, false);
+        }
+    }
+
+    /**
      * 設定ファイル(gSetting.txt)の情報を用いてキャラクターの画像サイズを初期化する．
      *
      * @param characterName the character name

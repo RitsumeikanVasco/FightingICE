@@ -2,6 +2,7 @@ package twitch;
 
 import command.CommandTable;
 import enumerate.Action;
+import gamescene.Play;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import manager.InputManager;
@@ -14,7 +15,7 @@ import java.net.URISyntaxException;
 public class socket {
     private static final int SOCKET_PORT = 3001;
     private static final String SERVER_CONNECTION = "Connected to Server!";
-
+    public static Play play;
     // Attack List
     static private final HashMap<String, Action> ATTACK_MAP = new HashMap<>() {{
         // Move 
