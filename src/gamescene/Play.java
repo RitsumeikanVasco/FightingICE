@@ -50,7 +50,7 @@ public class Play extends GameScene {
     /**
      * 対戦処理を行うクラスのインスタンス．
      */
-    private Fighting fighting;
+    public Fighting fighting;
 
     /**
      * 現在のフレーム．

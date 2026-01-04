@@ -75,6 +75,22 @@ public class socket {
                 System.out.println(SERVER_CONNECTION);
             });
 
+            socket.on("Heal", args->{
+                String teamArg = (String) args[0];
+                int healingAmount = (int) args[1];
+                Boolean team = TEAM_MAP.get(teamArg);
+
+                if (play != null){
+                    fighting.Character[] characters = play.fighting.getCharacters();
+
+                    if(team){
+                        characters[0].heal(healingAmount);
+                    }else {
+                        characters[1].heal(healingAmount);
+                    }
+                }
+            });
+
             //Team Attack
             socket.on("oneaction", args->{
                 String teamArg = (String) args[0];
