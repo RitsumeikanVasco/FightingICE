@@ -60,7 +60,7 @@ public class socket {
         put("AIR_FA", Action.AIR_FA);
         put("AIR_FB", Action.AIR_FB);
     }};
-
+    static public Socket socket;
     static private final HashMap<String, Boolean> TEAM_MAP = new HashMap<String, Boolean>(){{
         put("P1", true);
         put("P2", false);
@@ -68,7 +68,7 @@ public class socket {
 
     static {
         try {
-            Socket socket = IO.socket("http://localhost:" + SOCKET_PORT);
+            socket = IO.socket("http://localhost:" + SOCKET_PORT);
 
             socket.on(Socket.EVENT_CONNECT, args -> {
                 System.out.println(SERVER_CONNECTION);

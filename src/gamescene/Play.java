@@ -3,6 +3,7 @@ package gamescene;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 
+import java.io.Console;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -17,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import aiinterface.ThreadController;
+import command.CommandTable;
 import enumerate.GameSceneName;
 import fighting.Fighting;
 import informationcontainer.RoundResult;
@@ -34,6 +36,7 @@ import struct.AudioSource;
 import struct.FrameData;
 import struct.GameData;
 import struct.ScreenData;
+import twitch.socket;
 import util.DebugActionData;
 import util.LogWriter;
 import util.ResourceDrawer;
@@ -346,6 +349,7 @@ public class Play extends GameScene {
         WaveFileWriter.getInstance().writeToFile();
 
         if (FlagSetting.slowmotion) {
+
             if (this.endFrame > GameSetting.ROUND_EXTRAFRAME_NUMBER) {
                 this.fighting.processingRoundEnd();
                 RoundResult roundResult = new RoundResult(this.frameData);
@@ -381,6 +385,9 @@ public class Play extends GameScene {
             }
 
         } else {
+            String winner = getWinner(); // P2 or P1
+            postRoundEndToServer(winner, this.currentRound);
+
             this.endFrame = 0;
             this.fighting.processingRoundEnd();
             RoundResult roundResult = new RoundResult(this.frameData);
@@ -439,42 +446,7 @@ public class Play extends GameScene {
      * ラウンド結果を Web サーバーに送信する
      */
     private void postRoundEndToServer(String winner, int round) {
-        System.out.println("Winner: " + winner);
-
-        try {
-            String json = String.format(
-                    "{\"winner\":\"%s\",\"round\":%d}",
-                    winner, round
-            );
-
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://127.0.0.1:3010/round_end"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(json))
-                    .build();
-
-            // 非同期で送信（ゲームを止めない）
-            HTTP.sendAsync(request, HttpResponse.BodyHandlers.discarding())
-                    .thenAccept(res ->
-                            Logger.getAnonymousLogger().log(
-                                    Level.INFO,
-                                    "[HTTP] round_end sent: " + res.statusCode()
-                            )
-                    )
-                    .exceptionally(e -> {
-                        Logger.getAnonymousLogger().log(
-                                Level.WARNING,
-                                "[HTTP] round_end failed: " + e
-                        );
-                        return null;
-                    });
-
-        } catch (Exception e) {
-            Logger.getAnonymousLogger().log(
-                    Level.WARNING,
-                    "[HTTP] build request failed: " + e
-            );
-        }
+        socket.socket.emit("RoundFinished", winner, round);
     }
     // --------------------
 
